@@ -1,0 +1,87 @@
+# Binaries
+/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories
+/vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Configuration files with secrets
+config.yaml
+config.local.yaml
+
+# Kubernetes secrets (use secrets.yaml.example as template)
+deployments/kubernetes/secrets.yaml
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python
+__pycache__/
+*.egg-info/
+*.pyc
+
+# Build output
+/dist/
+/build/
+
+# Temporary files
+/tmp/
+*.tmp
+
+# Test coverage
+coverage.html
+coverage.txt
+
+# Air live reload
+tmp/
+
+# AWS credentials (never commit)
+.aws/
+
+# Database dumps
+*.sql.gz
+*.dump
+
+# Debug files
+debug
+__debug_bin
+
+# Go workspace files (go.work is committed — needed for gen/go multi-module)
+go.work.sum
+tools/blackout/blackout-linux
+tools/hostctl/hostctl-linux
+
+tools/infractl/infractl
+.omc/

@@ -1,0 +1,126 @@
+{
+  "version": "1.0",
+  "server": {
+    "enabled": false,
+    "host": "0.0.0.0",
+    "port": 9090,
+    "refresh_interval": "30s",
+    "auth": {
+      "enabled": false,
+      "token": ""
+    },
+    "export": {
+      "format": "both",
+      "prom_path": "/metrics",
+      "json_path": "/api/v1/snapshot"
+    }
+  },
+  "baremetal_hosts": [
+    {
+      "name": "web-01",
+      "enabled": true,
+      "labels": {
+        "role": "web",
+        "env": "prod",
+        "datacenter": "us-east"
+      }
+    }
+  ],
+  "defaults": {
+    "refresh_interval": "30s",
+    "output_format": "table",
+    "show_cached": true
+  },
+  "cache": {
+    "enabled": true,
+    "backend": "memory",
+    "ttl": "5m",
+    "max_size": 1000
+  },
+  "output": {
+    "color_enabled": true,
+    "timestamps": true,
+    "columns": {
+      "compute": ["name", "status", "cpu", "memory", "region"],
+      "gpu": ["name", "gpu_type", "gpu_count", "utilization", "price"]
+    }
+  },
+  "providers": {
+    "cloudflare": {
+      "enabled": true,
+      "auth": {
+        "method": "api_key",
+        "env_api_key": "CLOUDFLARE_API_TOKEN"
+      },
+      "services": ["workers", "r2", "ai"],
+      "rate_limit": {
+        "requests_per_second": 4,
+        "burst": 10,
+        "timeout": "30s"
+      },
+      "options": {
+        "account_id": "your-account-id"
+      }
+    },
+    "oracle": {
+      "enabled": true,
+      "auth": {
+        "method": "service_account",
+        "key_file": "~/.oci/config"
+      },
+      "regions": ["us-ashburn-1", "us-phoenix-1"],
+      "services": ["compute", "containers", "autonomous_db"],
+      "rate_limit": {
+        "requests_per_second": 10,
+        "burst": 20,
+        "timeout": "30s"
+      },
+      "options": {
+        "compartment_id": "your-compartment-ocid"
+      }
+    },
+    "neon": {
+      "enabled": true,
+      "auth": {
+        "method": "api_key",
+        "env_api_key": "NEON_API_KEY"
+      }
+    },
+    "vastai": {
+      "enabled": true,
+      "auth": {
+        "method": "api_key",
+        "env_api_key": "VASTAI_API_KEY"
+      }
+    },
+    "runpod": {
+      "enabled": true,
+      "auth": {
+        "method": "api_key",
+        "env_api_key": "RUNPOD_API_KEY"
+      }
+    },
+    "azure": {
+      "enabled": false,
+      "auth": {
+        "method": "service_account",
+        "key_file": "~/.azure/credentials.json"
+      },
+      "services": ["vms", "aks", "functions"],
+      "options": {
+        "subscription_id": "your-subscription-id"
+      }
+    },
+    "gcp": {
+      "enabled": false,
+      "auth": {
+        "method": "service_account",
+        "key_file": "~/.gcp/service-account.json"
+      },
+      "services": ["compute", "gke", "functions"],
+      "options": {
+        "project_id": "your-project-id"
+      }
+    }
+  }
+}

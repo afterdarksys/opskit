@@ -1,0 +1,26 @@
+[Unit]
+Description=StatsAgent - Lightweight System Stats Collector
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/statsagent serve
+Restart=on-failure
+RestartSec=5s
+
+# Configure via environment
+Environment=STATSAGENT_PORT=9100
+Environment=STATSAGENT_INTERVAL=15s
+# Environment=STATSAGENT_PUSH_ENDPOINT=https://your-collector/ingest
+# Environment=STATSAGENT_LABELS=dc=iad1,env=prod
+# Environment=STATSAGENT_DOCKER_SOCKET=/var/run/docker.sock
+# Environment=STATSAGENT_K3S_KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
+# Harden
+ProtectSystem=full
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=multi-user.target
